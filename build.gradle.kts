@@ -1,0 +1,7 @@
+plugins {
+    java
+}
+
+repositories {
+    maven("https://maven.aliyun.com/nexus/content/groups/public/")
+}
