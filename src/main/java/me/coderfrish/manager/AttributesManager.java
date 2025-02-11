@@ -1,9 +1,7 @@
 package me.coderfrish.manager;
 
 import me.coderfrish.BaseAttribute;
-import me.coderfrish.attribute.CodeAttribute;
 import me.coderfrish.attribute.ConstantValueAttribute;
-import me.coderfrish.attribute.ExceptionAttribute;
 
 import java.io.DataInputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -19,8 +17,6 @@ public class AttributesManager {
 
     static {
         registerAttribute("ConstantValue", ConstantValueAttribute.class);
-        registerAttribute("Exceptions", ExceptionAttribute.class);
-        registerAttribute("Code", CodeAttribute.class);
     }
 
     public static BaseAttribute getAttribute(String name, DataInputStream stream) throws Exception {
