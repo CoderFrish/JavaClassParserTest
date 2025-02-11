@@ -3,9 +3,9 @@ package me.coderfrish;
 import java.io.DataInputStream;
 
 public abstract class BaseContent {
-    protected final DataInputStream buffer;
+    protected final DataInputStream stream;
 
-    public BaseContent(DataInputStream buffer) {
-        this.buffer = buffer;
+    public BaseContent(DataInputStream stream) {
+        this.stream = stream;
     }
 }
