@@ -12,8 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final Map<Integer, BaseContent> contents = new HashMap<>();
+    public static final Map<Integer, BaseContent> contents = new HashMap<>();
     private static final List<Modifier> modifiers = new ArrayList<>();
+    private static final List<String> interfaces = new ArrayList<>();
+    private static final List<Field> fields = new ArrayList<>();
+    private static final List<Method> methods = new ArrayList<>();
+    private static final List<Attribute> attributes = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
         try(
@@ -79,6 +83,29 @@ public class Main {
             ClassContent super_class_content = (ClassContent) contents.get(super_class);
             UTF8Content super_class_utf8_content = (UTF8Content) contents.get(super_class_content.name_index);
             System.out.println("Super class name: " + super_class_utf8_content.content);
+
+            int interfaces_count = data.readShort();
+            for (int i = 0; i < interfaces_count; i++) {
+                int index = data.readShort();
+                ClassContent interface_class_content = (ClassContent) contents.get(index);
+                UTF8Content interface_utf8_content = (UTF8Content) contents.get(interface_class_content.name_index);
+                interfaces.add(interface_utf8_content.content);
+            }
+
+            int fields_count = data.readShort();
+            for (int i = 0; i < fields_count; i++) {
+                fields.add(new Field(data));
+            }
+
+            int methods_count = data.readShort();
+            for (int i = 0; i < methods_count; i++) {
+                methods.add(new Method(data));
+            }
+
+            int attributes_count = data.readShort();
+            for (int i = 0; i < attributes_count; i++) {
+                attributes.add(new Attribute(data));
+            }
         }
     }
 }
