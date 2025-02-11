@@ -5,17 +5,16 @@ import me.coderfrish.manager.AttributesManager;
 import me.coderfrish.modifier.FieldModifier;
 
 import java.io.DataInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Field {
+public class Method {
     public final List<FieldModifier> modifiers = new ArrayList<>();
     public final List<BaseAttribute> attributes = new ArrayList<>();
     public final String name;
     public final String descriptor;
 
-    public Field(DataInputStream stream) throws java.lang.Exception {
+    public Method(DataInputStream stream) throws java.lang.Exception {
         int access_flags = stream.readShort();
         FieldModifier.getMap().forEach((k, v) -> {
             if ((access_flags & k) != 0) {

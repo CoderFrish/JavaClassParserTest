@@ -18,16 +18,12 @@ public class ConstantValueAttribute extends BaseAttribute {
         super(stream);
         int value_index = buffer.readShort();
         BaseContent value_content = Main.contents.get(value_index);
-        if (value_content instanceof IntegerContent integerContent) {
-            this.value = integerContent.value;
-        } else if (value_content instanceof FloatContent floatContent) {
-            this.value = floatContent.value;
-        } else if (value_content instanceof LongContent longContent) {
-            this.value = longContent.value;
-        } else if (value_content instanceof DoubleContent doubleContent) {
-            this.value = doubleContent.value;
-        } else {
-            this.value = null;
+        switch (value_content) {
+            case IntegerContent integerContent -> this.value = integerContent.value;
+            case FloatContent floatContent -> this.value = floatContent.value;
+            case LongContent longContent -> this.value = longContent.value;
+            case DoubleContent doubleContent -> this.value = doubleContent.value;
+            case null, default -> this.value = null;
         }
     }
 }

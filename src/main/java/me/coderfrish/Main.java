@@ -14,9 +14,10 @@ public class Main {
     public static final Map<Integer, BaseContent> contents = new HashMap<>();
     private static final List<Modifier> modifiers = new ArrayList<>();
     private static final List<Field> fields = new ArrayList<>();
+    private static final List<Method> methods = new ArrayList<>();
     private static final List<String> interfaces = new ArrayList<>();
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws java.lang.Exception {
         try(
                 InputStream stream = new FileInputStream("D:\\Test\\test\\TestImpl.class");
                 DataInputStream data = new DataInputStream(stream)
@@ -100,6 +101,9 @@ public class Main {
             for (int i = 0; i < fields_count; i++) {
                 fields.add(new Field(data));
             }
+
+            int methods_count = data.readShort();
+            methods.add(new Method(data));
         }
     }
 }
