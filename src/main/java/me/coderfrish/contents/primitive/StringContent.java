@@ -1,4 +1,4 @@
-package me.coderfrish.contents;
+package me.coderfrish.contents.primitive;
 
 import me.coderfrish.BaseContent;
 

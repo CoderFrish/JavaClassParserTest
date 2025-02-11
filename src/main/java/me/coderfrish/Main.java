@@ -1,27 +1,24 @@
 package me.coderfrish;
 
+import me.coderfrish.attribute.ConstantValueAttribute;
 import me.coderfrish.contents.*;
 import me.coderfrish.contents.primitive.*;
+import me.coderfrish.modifier.Modifier;
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     public static final Map<Integer, BaseContent> contents = new HashMap<>();
     private static final List<Modifier> modifiers = new ArrayList<>();
-    private static final List<String> interfaces = new ArrayList<>();
     private static final List<Field> fields = new ArrayList<>();
-    private static final List<Method> methods = new ArrayList<>();
-    private static final List<Attribute> attributes = new ArrayList<>();
+    private static final List<String> interfaces = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
         try(
-                InputStream stream = new FileInputStream("D:\\Test\\test\\Main.class");
+                InputStream stream = new FileInputStream("D:\\Test\\test\\TestImpl.class");
                 DataInputStream data = new DataInputStream(stream)
         ) {
             int magic = data.readInt();
@@ -49,8 +46,14 @@ public class Main {
                     case 3 -> contents.put(i, new IntegerContent(data));
                     case 4 -> contents.put(i, new FloatContent(data));
 
-                    case 5 -> contents.put(i, new LongContent(data));
-                    case 6 -> contents.put(i, new DoubleContent(data));
+                    case 5 -> {
+                        contents.put(i, new LongContent(data));
+                        i = i + 1;
+                    }
+                    case 6 -> {
+                        contents.put(i, new DoubleContent(data));
+                        i = i + 1;
+                    }
 
                     case 12 -> contents.put(i, new NameAndTypeContent(data));
 
@@ -85,6 +88,7 @@ public class Main {
             System.out.println("Super class name: " + super_class_utf8_content.content);
 
             int interfaces_count = data.readShort();
+            System.out.println("Interface count: " + interfaces_count);
             for (int i = 0; i < interfaces_count; i++) {
                 int index = data.readShort();
                 ClassContent interface_class_content = (ClassContent) contents.get(index);
@@ -95,16 +99,6 @@ public class Main {
             int fields_count = data.readShort();
             for (int i = 0; i < fields_count; i++) {
                 fields.add(new Field(data));
-            }
-
-            int methods_count = data.readShort();
-            for (int i = 0; i < methods_count; i++) {
-                methods.add(new Method(data));
-            }
-
-            int attributes_count = data.readShort();
-            for (int i = 0; i < attributes_count; i++) {
-                attributes.add(new Attribute(data));
             }
         }
     }

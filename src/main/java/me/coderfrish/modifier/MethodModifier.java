@@ -1,4 +1,4 @@
-package me.coderfrish;
+package me.coderfrish.modifier;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -6,10 +6,10 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 public class FloatContent extends BaseContent {
-    public final int bytes;
+    public final float value;
 
     public FloatContent(DataInputStream stream) throws IOException {
         super(stream);
-        this.bytes = stream.readInt();
+        this.value = Float.intBitsToFloat(new IntegerContent(stream).value);
     }
 }

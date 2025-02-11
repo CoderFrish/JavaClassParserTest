@@ -6,12 +6,10 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 public class DoubleContent extends BaseContent {
-    public final int high_bytes;
-    public final int low_bytes;
+    public final double value;
 
     public DoubleContent(DataInputStream stream) throws IOException {
         super(stream);
-        this.high_bytes = stream.readInt();
-        this.low_bytes = stream.readInt();
+        this.value = Double.longBitsToDouble(new LongContent(stream).value);
     }
 }
