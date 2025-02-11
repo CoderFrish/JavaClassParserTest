@@ -1,6 +1,6 @@
 # JavaClassParser
 
-感谢[Oracle Docs](https://docs.oracle.com/en/java/javase/22/)提供文档
+感谢[Oracle Docs](https://docs.oracle.com/)提供文档
 
 Java `.class`中结构类型
  - u1 (指的是一个字节的数据，一般在Java的类型中指byte类型)
@@ -8,7 +8,7 @@ Java `.class`中结构类型
  - u4 (指的是四个字节的数据，一般在Java的类型中指int类型)
  - cp_info (常量池的结构类型)
 
-Java `.class`主要结构
+Java `.class`主要结构 (来自[Oracle Docs](https://docs.oracle.com/))
 ```text
 ClassFile {
     u4             magic;
