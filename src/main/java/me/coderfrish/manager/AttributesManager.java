@@ -22,7 +22,7 @@ public class AttributesManager {
     public static BaseAttribute getAttribute(String name, DataInputStream stream) throws Exception {
         Class<? extends BaseAttribute> clazz = attributes.get(name);
         if (clazz == null) {
-            throw new RuntimeException(name + "is not extist.");
+            throw new RuntimeException(name + " is not extist.");
         }
 
         return clazz.getConstructor(DataInputStream.class).newInstance(stream);
